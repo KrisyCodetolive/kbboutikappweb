@@ -18,13 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  getGreeting,
-} from "@/utils/getGreeting"
-import {
-  sendMessWhatsapp,
-} from "@/utils/sendMessWhatsapp"
-
+import { getGreeting } from "@/utils/getGreeting"
+import { sendMessWhatsapp } from "@/utils/sendMessWhatsapp"
 
 interface OrderSheetProps {
   priceUnit: number
@@ -32,15 +27,11 @@ interface OrderSheetProps {
   children: ReactNode
 }
 
-export function OrderSheet({
-  priceUnit,
-  children,
-  nomProduit,
-}: OrderSheetProps) {
-  // 🔹 Sheet control
+export function OrderSheet({ priceUnit, children, nomProduit }: OrderSheetProps) {
+  // 🔹 Contrôle de la Sheet
   const [open, setOpen] = useState(false)
 
-  // 🔹 States
+  // 🔹 États du formulaire
   const [name, setName] = useState("")
   const [whatsapp, setWhatsapp] = useState("")
   const [location, setLocation] = useState("")
@@ -49,9 +40,8 @@ export function OrderSheet({
 
   const totalPrice = quantity * priceUnit
 
-
   const handleSubmit = () => {
-    // 🔐 PROTECTIONS
+    // 🔐 Validation simple
     if (!name.trim() || !whatsapp.trim() || !location.trim()) {
       alert("Veuillez remplir tous les champs obligatoires.")
       return
@@ -79,10 +69,11 @@ Merci 🙂`
 
     console.log(message)
     sendMessWhatsapp(message)
-    // Fermer la sheet après succès
+
+    // Fermer la Sheet après succès
     setOpen(false)
 
-    // (optionnel) reset
+    // Réinitialiser les champs
     setName("")
     setWhatsapp("")
     setLocation("")
@@ -92,17 +83,12 @@ Merci 🙂`
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      {/* asChild = le bouton enfant déclenche la sheet */}
+      {/* asChild permet au bouton enfant de déclencher la sheet */}
       <SheetTrigger asChild>{children}</SheetTrigger>
 
-      <SheetContent
-        side="bottom"
-        className="rounded-t-2xl p-6 max-h-[90vh] overflow-y-auto"
-      >
+      <SheetContent side="bottom" className="rounded-t-2xl p-6 max-h-[90vh] overflow-y-auto">
         <SheetHeader>
-          <SheetTitle className="text-center text-xl font-bold">
-            COMMANDE
-          </SheetTitle>
+          <SheetTitle className="text-center text-xl font-bold">COMMANDE</SheetTitle>
         </SheetHeader>
 
         <form
@@ -112,6 +98,7 @@ Merci 🙂`
             handleSubmit()
           }}
         >
+          {/* Nom */}
           <div className="flex flex-col gap-1">
             <Label>Nom *</Label>
             <Input
@@ -121,6 +108,7 @@ Merci 🙂`
             />
           </div>
 
+          {/* WhatsApp */}
           <div className="flex flex-col gap-1">
             <Label>Numéro WhatsApp *</Label>
             <Input
@@ -130,15 +118,17 @@ Merci 🙂`
             />
           </div>
 
+          {/* Lieu */}
           <div className="flex flex-col gap-1">
             <Label>Lieu de livraison *</Label>
             <Input
-               placeholder="Ex : Yopougon, Angré..."
+              placeholder="Ex : Yopougon, Angré..."
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
           </div>
 
+          {/* Spécification */}
           <div className="flex flex-col gap-1">
             <Label>Spécification produit</Label>
             <Select onValueChange={setSpecification}>
@@ -146,14 +136,15 @@ Merci 🙂`
                 <SelectValue placeholder="Couleur" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Standard">vert</SelectItem>
-                <SelectItem value="Premium">blanc</SelectItem>
-                <SelectItem value="Sur mesure">rouge</SelectItem>
-                <SelectItem value="Sur mesure">noir</SelectItem>
+                <SelectItem value="vert">Vert</SelectItem>
+                <SelectItem value="blanc">Blanc</SelectItem>
+                <SelectItem value="rouge">Rouge</SelectItem>
+                <SelectItem value="noir">Noir</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
+          {/* Quantité */}
           <div className="flex flex-col gap-1">
             <Label>Quantité *</Label>
             <Input
@@ -164,14 +155,13 @@ Merci 🙂`
             />
           </div>
 
+          {/* Prix total */}
           <div className="bg-gray-100 rounded-lg p-4 flex justify-between">
             <span>Prix total</span>
-            <span className="font-bold">
-              {totalPrice.toLocaleString()} FCFA
-            </span>
+            <span className="font-bold">{totalPrice.toLocaleString()} FCFA</span>
           </div>
 
-          <Button type="submit" className="mt-4 rounded-xl p-7">
+          <Button type="submit" className="mt-4 rounded-xl p-4">
             Valider la commande
           </Button>
         </form>
@@ -179,5 +169,3 @@ Merci 🙂`
     </Sheet>
   )
 }
-
-
