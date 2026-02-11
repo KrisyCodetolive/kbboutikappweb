@@ -11,8 +11,8 @@ type ProductMediaProps = {
 
 export default function ProductMedia({ type, src, alt }: ProductMediaProps) {
   return (
-    <Card className="w-full flex-none max-w-md mx-auto overflow-hidden p-0">
-      <CardContent className="p-0">
+    <Card className="w-full flex-none max-w-md mx-auto overflow-hidden p-0 ">
+      <CardContent className="p-0 ">
         {type === "image" ? (
           <img
             src={src}
