@@ -86,16 +86,21 @@ Merci 🙂`
       {/* asChild permet au bouton enfant de déclencher la sheet */}
       <SheetTrigger asChild>{children}</SheetTrigger>
 
-      <SheetContent side="bottom" className="rounded-t-2xl p-6 max-h-[90vh] overflow-y-auto">
+      <SheetContent
+        side="bottom"
+        className="rounded-t-2xl p-6 max-h-[90vh] overflow-y-auto"
+      >
         <SheetHeader>
-          <SheetTitle className="text-center text-xl font-bold text-black">COMMANDE</SheetTitle>
+          <SheetTitle className="text-center text-xl font-bold text-black">
+            COMMANDE
+          </SheetTitle>
         </SheetHeader>
 
         <form
           className="mt-6 flex flex-col gap-4"
           onSubmit={(e) => {
-            e.preventDefault()
-            handleSubmit()
+            e.preventDefault();
+            handleSubmit();
           }}
         >
           {/* Nom */}
@@ -147,25 +152,49 @@ Merci 🙂`
           {/* Quantité */}
           <div className="flex flex-col gap-1">
             <Label>Quantité *</Label>
-            <Input
-              type="number"
-              min={1}
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-            />
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                className="w-10 h-10"
+                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              >
+                -
+              </Button>
+
+              <span className="w-12 text-center text-lg font-medium">
+                {quantity}
+              </span>
+
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                className="w-10 h-10"
+                onClick={() => setQuantity((q) => q + 1)}
+              >
+                +
+              </Button>
+            </div>
           </div>
 
           {/* Prix total */}
           <div className="bg-gray-100 rounded-lg p-4 flex justify-between">
             <span>Prix total</span>
-            <span className="font-bold">{totalPrice.toLocaleString()} FCFA</span>
+            <span className="font-bold">
+              {totalPrice.toLocaleString()} FCFA
+            </span>
           </div>
 
-          <Button type="submit" className="mt-4 rounded-xl p-4 bg-black text-white">
+          <Button
+            type="submit"
+            className="mt-4 rounded-xl p-4 bg-black text-white"
+          >
             Valider la commande
           </Button>
         </form>
       </SheetContent>
     </Sheet>
-  )
+  );
 }

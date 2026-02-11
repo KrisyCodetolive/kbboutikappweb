@@ -56,7 +56,7 @@ export default function ProductPage() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
           
           {/* Image */}
-          <div className="w-full md:border">
+          <div className="w-full">
             <ProductMedia
               type="image"
               src={product.mediaUrl}
