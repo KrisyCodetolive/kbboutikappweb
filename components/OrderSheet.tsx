@@ -88,7 +88,7 @@ Merci 🙂`
 
       <SheetContent side="bottom" className="rounded-t-2xl p-6 max-h-[90vh] overflow-y-auto">
         <SheetHeader>
-          <SheetTitle className="text-center text-xl font-bold">COMMANDE</SheetTitle>
+          <SheetTitle className="text-center text-xl font-bold text-black">COMMANDE</SheetTitle>
         </SheetHeader>
 
         <form
@@ -129,7 +129,7 @@ Merci 🙂`
           </div>
 
           {/* Spécification */}
-          <div className="flex flex-col gap-1">
+          {/* <div className="flex flex-col gap-1">
             <Label>Spécification produit</Label>
             <Select onValueChange={setSpecification}>
               <SelectTrigger>
@@ -142,7 +142,7 @@ Merci 🙂`
                 <SelectItem value="noir">Noir</SelectItem>
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
 
           {/* Quantité */}
           <div className="flex flex-col gap-1">
@@ -161,7 +161,7 @@ Merci 🙂`
             <span className="font-bold">{totalPrice.toLocaleString()} FCFA</span>
           </div>
 
-          <Button type="submit" className="mt-4 rounded-xl p-4">
+          <Button type="submit" className="mt-4 rounded-xl p-4 bg-black text-white">
             Valider la commande
           </Button>
         </form>
