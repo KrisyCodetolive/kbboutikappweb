@@ -39,7 +39,7 @@ export default function ProductPage() {
   }, [Id]);
 
   //redirection en case 404
-    if (!Id) {
+    if (!product) {
     notFound();
   } 
 
