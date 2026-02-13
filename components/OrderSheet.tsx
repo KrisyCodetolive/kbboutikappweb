@@ -41,7 +41,7 @@ export function OrderSheet({ priceUnit, children, nomProduit }: OrderSheetProps)
   const totalPrice = quantity * priceUnit
 
   const handleSubmit = () => {
-    // 🔐 Validation simple
+
     if (!name.trim() || !whatsapp.trim() || !location.trim()) {
       alert("Veuillez remplir tous les champs obligatoires.")
       return
