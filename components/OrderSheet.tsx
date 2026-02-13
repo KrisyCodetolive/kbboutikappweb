@@ -134,7 +134,7 @@ Merci 🙂`
           </div>
 
           {/* Spécification */}
-          {/* <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1">
             <Label>Spécification produit</Label>
             <Select onValueChange={setSpecification}>
               <SelectTrigger>
@@ -147,7 +147,7 @@ Merci 🙂`
                 <SelectItem value="noir">Noir</SelectItem>
               </SelectContent>
             </Select>
-          </div> */}
+          </div>
 
           {/* Quantité */}
           <div className="flex flex-col gap-1">
