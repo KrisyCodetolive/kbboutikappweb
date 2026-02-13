@@ -9,7 +9,7 @@ import { OrderSheet } from "@/components/OrderSheet";
 import ProductMedia from "@/components/ProductMedia";
 import { Product } from "@/lib/type";
 import { getProductById } from "@/services/products";
-import { useParams } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function ProductPage() {
@@ -37,6 +37,11 @@ export default function ProductPage() {
     
     fetchProduct();
   }, [Id]);
+
+  //redirection en case 404
+    if (!product) {
+    notFound();
+  } 
 
   if (loading) {
     return <p className="p-5">Chargement du produit...</p>;
