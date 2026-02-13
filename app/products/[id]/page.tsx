@@ -38,10 +38,10 @@ export default function ProductPage() {
     fetchProduct();
   }, [Id]);
 
-  //redirection en case 404
-    if (!product) {
-    notFound();
-  } 
+  //redirection en case 
+  if (!Id) {
+  notFound();
+} 
 
   if (loading) {
     return <p className="p-5">Chargement du produit...</p>;
