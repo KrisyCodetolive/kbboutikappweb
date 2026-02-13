@@ -39,9 +39,7 @@ export default function ProductPage() {
   }, [Id]);
 
   //redirection en case 
-  if (!Id) {
-  notFound();
-} 
+
 
   if (loading) {
     return <p className="p-5">Chargement du produit...</p>;
