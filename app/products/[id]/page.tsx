@@ -2,6 +2,8 @@
 
 
 import Navbar from "@/app/components/NavBar";
+import Loader from "@/app/Loader";
+import NotFound from "@/app/not-found";
 import Ordercta from "@/components/btnPasserCommande";
 import Cardre from "@/components/Cardre";
 import { DescriptionCard } from "@/components/DescCart";
@@ -38,17 +40,15 @@ export default function ProductPage() {
     fetchProduct();
   }, [Id]);
 
-  //redirection en case 
-  if (!Id) {
-  notFound();
-} 
 
   if (loading) {
-    return <p className="p-5">Chargement du produit...</p>;
+    return <div className="h-screen">
+              <Loader/>
+          </div> ;
   }
 
   if (!product) {
-    return <p className="p-5">Produit introuvable</p>;
+    return <NotFound/>;
   }
 
   return (
