@@ -3,7 +3,12 @@ import Link from "next/link";
 export default function NotFound() {
   const phoneNumber = "2250702019230";
   const message = encodeURIComponent(
-    "Salut je veux en savoir plus sur tes produits, j'ai pas pu accéder à ton site de vente."
+    `👋 Salut !
+
+Je suis intéressé par tes produits, mais je n’ai pas pu accéder à ton site de vente.  
+💻 Peux-tu me dire plus sur tes articles ?  
+
+Merci beaucoup ! 🙏`
   );
 
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;

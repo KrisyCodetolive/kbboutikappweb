@@ -1,55 +1,58 @@
-"use client"
+"use client";
 
-import { ReactNode, useState } from "react"
+import { ReactNode, useState } from "react";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { getGreeting } from "@/utils/getGreeting"
-import { sendMessWhatsapp } from "@/utils/sendMessWhatsapp"
+} from "@/components/ui/select";
+import { getGreeting } from "@/utils/getGreeting";
+import { sendMessWhatsapp } from "@/utils/sendMessWhatsapp";
 
 interface OrderSheetProps {
-  priceUnit: number
-  nomProduit: string
-  children: ReactNode
+  priceUnit: number;
+  nomProduit: string;
+  children: ReactNode;
 }
 
-export function OrderSheet({ priceUnit, children, nomProduit }: OrderSheetProps) {
+export function OrderSheet({
+  priceUnit,
+  children,
+  nomProduit,
+}: OrderSheetProps) {
   // 🔹 Contrôle de la Sheet
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   // 🔹 États du formulaire
-  const [name, setName] = useState("")
-  const [whatsapp, setWhatsapp] = useState("")
-  const [location, setLocation] = useState("")
-  const [specification, setSpecification] = useState("")
-  const [quantity, setQuantity] = useState(1)
+  const [name, setName] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [location, setLocation] = useState("");
+  const [specification, setSpecification] = useState("");
+  const [quantity, setQuantity] = useState(1);
 
-  const totalPrice = quantity * priceUnit
+  const totalPrice = quantity * priceUnit;
 
   const handleSubmit = () => {
-
     if (!name.trim() || !whatsapp.trim() || !location.trim()) {
-      alert("Veuillez remplir tous les champs obligatoires.")
-      return
+      alert("Veuillez remplir tous les champs obligatoires.");
+      return;
     }
 
     if (quantity <= 0) {
-      alert("La quantité doit être supérieure à 0.")
-      return
+      alert("La quantité doit être supérieure à 0.");
+      return;
     }
 
     const message = `
@@ -58,28 +61,28 @@ Je souhaite passer une commande.
 
 🛍 Produit : ${nomProduit}
 📦 Quantité : ${quantity}
-🧾 Spécification : ${specification || "Non précisé"}
+🧾 Couleur : ${specification || "Non précisé"}
 💰 Prix : ${totalPrice.toLocaleString()} FCFA
 
 👤 Nom : ${name}
 📍 Lieu de livraison : ${location}
 📞 Numéro WhatsApp : ${whatsapp}
 
-Merci 🙂`
+Merci 🙂`;
 
-    console.log(message)
-    sendMessWhatsapp(message)
+    console.log(message);
+    sendMessWhatsapp(message);
 
     // Fermer la Sheet après succès
-    setOpen(false)
+    setOpen(false);
 
     // Réinitialiser les champs
-    setName("")
-    setWhatsapp("")
-    setLocation("")
-    setSpecification("")
-    setQuantity(1)
-  }
+    setName("");
+    setWhatsapp("");
+    setLocation("");
+    setSpecification("");
+    setQuantity(1);
+  };
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -134,20 +137,28 @@ Merci 🙂`
           </div>
 
           {/* Spécification */}
-          {/* <div className="flex flex-col gap-1">
-            <Label>Spécification produit</Label>
+          <div className="flex flex-col gap-2 max-w-xs">
+          
             <Select onValueChange={setSpecification}>
-              <SelectTrigger>
+              <SelectTrigger className="bg-gray-50 text-gray-800 border border-gray-300 focus:ring-2 focus:ring-blue-400 rounded-md">
                 <SelectValue placeholder="Couleur" />
               </SelectTrigger>
-              <SelectContent>
+
+              <SelectContent className="bg-white border border-gray-200 shadow-lg rounded-md">
                 <SelectItem value="vert">Vert</SelectItem>
                 <SelectItem value="blanc">Blanc</SelectItem>
                 <SelectItem value="rouge">Rouge</SelectItem>
                 <SelectItem value="noir">Noir</SelectItem>
               </SelectContent>
             </Select>
-          </div> */}
+
+            {specification && (
+              <p className="text-sm text-gray-600 mt-1">
+                Couleur sélectionnée :{" "}
+                <span className="font-semibold">{specification}</span>
+              </p>
+            )}
+          </div>
 
           {/* Quantité */}
           <div className="flex flex-col gap-1">
