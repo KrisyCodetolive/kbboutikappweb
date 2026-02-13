@@ -12,16 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// 🔹 Metadata pour le title et les favicons
+// 🔹 Metadata pour le title et les favicons avec chemins absolus
 export const metadata: Metadata = {
   title: "KBboutik - Boutique en ligne",
   description: "Boutique en ligne de produits",
   icons: {
     icon: [
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: "/favicon.png",
+      { url: "/favicon-16x16.png?v=2", sizes: "16x16", type: "image/png" },
+    ]
   },
 };
 
@@ -29,9 +27,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}
       >
         {children}
       </body>
